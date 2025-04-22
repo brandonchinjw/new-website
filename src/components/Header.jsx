@@ -28,7 +28,7 @@ function Header() {
                 <a href="/research">Research Projects</a>
                 <a href="/skills">Skillset</a>
                 <a href="/contact">Contact</a>
-                <a href="/resume" className="resume-button">Resume</a>
+                <a href="/resume.pdf" target="_blank" rel="noopener noreferrer" className="resume-button">Resume</a>
             </nav>
         </div>
     );
