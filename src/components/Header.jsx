@@ -18,7 +18,6 @@ function Header() {
                     <h1>chin</h1>
                 </span>
             </a>
-            
             <button className="mobile-menu-button" onClick={toggleMenu}>
                 <span className="menu-icon"></span>
             </button>
