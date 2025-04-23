@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-route
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import './Skills.css'
+import './Contact.css'
 import Header from './components/Header'
 import ResearchProject from './components/ResearchProject'
 
@@ -212,6 +214,25 @@ function Experience() {
   return (
     <div className="page-content">
       <h2 className="page-title">Work Experience</h2>
+      
+      {/* Added Experience Intro Section */}
+      <div className="experience-intro-section">
+        <div className="experience-intro-content">
+          <h3 className="experience-intro-heading">Driving Growth & Innovation</h3>
+          <p className="experience-intro-text">
+            Driven by a commitment to <span className="highlight-text">technical excellence</span>, my professional journey focuses 
+            on <span className="highlight-text">software engineering and full-stack development</span>. I design, build, and scale 
+            applications across the stack, utilizing expertise in modern front-end frameworks, back-end services, 
+            and data systems to deliver impactful and innovative solutions.
+          </p>
+        </div>
+        <div className="experience-intro-graphic">
+          {/* Placeholder graphics - customize as needed */}
+          <div className="graphic-briefcase"></div>
+          <div className="graphic-arrow-up"></div>
+          <div className="graphic-chart"></div>
+        </div>
+      </div>
       
       <div className="timeline-journey">
         {/* Clean horizontal timeline */}
@@ -439,125 +460,269 @@ function Research() {
 }
 
 function Skills() {
-  // Main skills data with proficiency levels
+  const [skillsInView, setSkillsInView] = useState(false);
+  const [additionalSkillsDelay, setAdditionalSkillsDelay] = useState({});
+  const skillsRef = useRef(null);
+  const additionalSkillsRef = useRef(null);
+
   const mainSkills = [
-    { name: "JavaScript", proficiency: 95, color: "#F7DF1E" },
-    { name: "TypeScript", proficiency: 90, color: "#3178C6" },
-    { name: "CSS", proficiency: 90, color: "#1572B6" },
-    { name: "Java", proficiency: 70, color: "#ED8B00" },
-    { name: "Python", proficiency: 96, color: "#3776AB" },
-    { name: "Next.js", proficiency: 80, color: "#000000" },
-    { name: "React", proficiency: 85, color: "#61DAFB" }
+    {
+      name: "JavaScript",
+      percentage: 95,
+      background: "linear-gradient(90deg, #F7DF1E, #EAD41C)",
+      icon: "/javascript.webp"
+    },
+    {
+      name: "TypeScript",
+      percentage: 90,
+      background: "linear-gradient(90deg, #3178C6, #5499E8)",
+      icon: "/typescript.png"
+    },
+    {
+      name: "CSS",
+      percentage: 90,
+      background: "linear-gradient(90deg, #264DE4, #2965F1)",
+      icon: "/css.png"
+    },
+    {
+      name: "Java",
+      percentage: 70,
+      background: "linear-gradient(90deg, #ED8B00, #F89820)",
+      icon: "/java.png"
+    },
+    {
+      name: "Python",
+      percentage: 96,
+      background: "linear-gradient(90deg, #3776AB, #74a7d0)",
+      icon: "/python.webp"
+    },
+    {
+      name: "Next.js",
+      percentage: 80,
+      background: "linear-gradient(90deg, #000000, #444444)",
+      icon: "/nextjs.png"
+    },
+    {
+      name: "React",
+      percentage: 85,
+      background: "linear-gradient(90deg, #61DAFB, #00C5E8)",
+      icon: "/reacticon.png"
+    }
   ];
-  
-  // Additional skills with icons
+
   const additionalSkills = [
-    { name: "C", icon: "/c.png" },
+    { name: "C", icon: "/cicon.webp" },
     { name: "Node.js", icon: "/nodejs.png" },
     { name: "MongoDB", icon: "/mongodb.png" },
-    { name: "Git", icon: "/git.png" },
-    { name: "Docker", icon: "/docker.png" },
-    { name: "AWS", icon: "/aws.png" },
-    { name: "Figma", icon: "/figma.png" },
-    { name: "PyTorch", icon: "/pytorch.png" },
-    { name: "Firebase", icon: "/firebase.png" },
-    { name: "GCP", icon: "/gcp.png" },
-    { name: "SQL", icon: "/sql.png" },
-    { name: "Pandas", icon: "/pandas.png" }
+    { name: "Git", icon: "/giticon.png" },
+    { name: "Docker", icon: "/dockericon.png" },
+    { name: "AWS", icon: "/awsicon.webp" },
+    { name: "Figma", icon: "/figmaicon.png" },
+    { name: "PyTorch", icon: "/pytorchicon.png" },
+    { name: "Firebase", icon: "/firebaseicon.webp" },
+    { name: "GCP", icon: "/gcpicon.png" },
+    { name: "SQL", icon: "/sqlicon2.png" },
+    { name: "Pandas", icon: "/pandasicon.ico" }
   ];
-  
-  // Reference to the skills section for animation
-  const mainSkillsRef = useRef(null);
-  
-  // Set up Intersection Observer for animation
+
+  // Calculate animation delays for the additional skills icons
+  useEffect(() => {
+    const delays = {};
+    additionalSkills.forEach((_, index) => {
+      delays[index] = 0.05 * index; // 50ms delay increment for each icon
+    });
+    setAdditionalSkillsDelay(delays);
+  }, []);
+
+  // Set up Intersection Observer for animations
   useEffect(() => {
     const observer = new IntersectionObserver(
-      ([entry]) => {
-        // When the section comes into view
-        if (entry.isIntersecting) {
-          // Add the 'in-view' class to trigger animations
-          mainSkillsRef.current.classList.add('in-view');
-          // Set explicit width for each bar for browsers that don't support CSS variables well
-          const bars = mainSkillsRef.current.querySelectorAll('.skill-bar-fill');
-          bars.forEach(bar => {
-            const percentage = bar.getAttribute('data-percentage');
-            bar.style.setProperty('--target-width', `${percentage}%`);
-            // For older browsers, set width directly as fallback
-            setTimeout(() => {
-              bar.style.width = `${percentage}%`;
-            }, 100);
-          });
-          // Disconnect after triggering
-          observer.disconnect();
-        }
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setSkillsInView(true);
+            observer.unobserve(entry.target);
+          }
+        });
       },
-      { threshold: 0.2 } // Trigger when 20% of the element is visible
+      { threshold: 0.2 }
     );
-    
-    // Start observing
-    if (mainSkillsRef.current) {
-      observer.observe(mainSkillsRef.current);
+
+    if (skillsRef.current) {
+      observer.observe(skillsRef.current);
     }
-    
-    // Cleanup
+
     return () => {
-      if (mainSkillsRef.current) {
-        observer.unobserve(mainSkillsRef.current);
+      if (skillsRef.current) {
+        observer.unobserve(skillsRef.current);
       }
     };
   }, []);
 
   return (
     <div className="page-content">
-      <h2 className="page-title">Technical Skills</h2>
+      <h2 className="page-title">Skillset</h2>
       
-      <div className="skills-container">
-        {/* Main Skills Section */}
-        <section className="main-skills-section" ref={mainSkillsRef}>
-          <h3 className="section-subtitle">Primary Expertise</h3>
-          <p className="section-description">
-            These are the technologies and languages I've mastered and use regularly in my projects.
+      <div className="skills-intro-section">
+        <div className="skills-intro-content">
+          <h3 className="skills-intro-heading">Building with Precision & Purpose</h3>
+          <p className="skills-intro-text">
+            My technical journey spans <span className="highlight-text">frontend and backend development</span>, 
+            with a strong foundation in modern programming languages and frameworks. I focus on building 
+            <span className="highlight-text"> scalable, maintainable solutions</span> that combine performance 
+            with exceptional user experience.
           </p>
+        </div>
+        <div className="skills-intro-graphic">
+          <div className="graphic-code-bracket"></div>
+          <div className="graphic-gear"></div>
+          <div className="graphic-chip"></div>
+        </div>
+      </div>
+      
+      <div 
+        ref={skillsRef} 
+        className={`main-skills-section ${skillsInView ? 'in-view' : ''}`}
+      >
+        <div className="section-header">
+          <div className="section-header-content">
+            <h3 className="section-subtitle">Core Technologies</h3>
+            <img src="/coretech.png" alt="Core Technologies Icon" className="header-icon" />
+          </div>
+        </div>
+        <div className="section-content">
           
           <div className="skill-bars-container">
             {mainSkills.map((skill, index) => (
               <div className="skill-bar-wrapper" key={index}>
                 <div className="skill-info">
+                  <img src={skill.icon} alt={`${skill.name} icon`} className="skill-language-icon" />
                   <span className="skill-name">{skill.name}</span>
-                  <span className="skill-percentage">{skill.proficiency}%</span>
+                  <span className="skill-percentage">{skill.percentage}%</span>
                 </div>
                 <div className="skill-bar-bg">
                   <div 
                     className="skill-bar-fill" 
                     style={{ 
-                      backgroundColor: skill.color
-                    }}
-                    data-percentage={skill.proficiency}
-                  ></div>
+                      '--target-width': `${skill.percentage}%`,
+                      background: skill.background,
+                      animationDelay: `${0.1 * index}s`
+                    }} 
+                  />
                 </div>
               </div>
             ))}
           </div>
-        </section>
-        
-        {/* Additional Skills Section */}
-        <section className="additional-skills-section">
-          <h3 className="section-subtitle">Additional Technologies</h3>
-          <p className="section-description">
-            I'm also proficient with these tools and technologies that I use to enhance my development workflow.
-          </p>
+        </div>
+      </div>
+      
+      <div 
+        ref={additionalSkillsRef} 
+        className="additional-skills-section"
+      >
+        <div className="section-header">
+          <div className="section-header-content">
+            <h3 className="section-subtitle">Supporting Technologies</h3>
+            <img src="/supportingtech.png" alt="Supporting Technologies Icon" className="header-icon" />
+          </div>
+        </div>
+        <div className="section-content">
           
           <div className="skills-grid">
             {additionalSkills.map((skill, index) => (
-              <div className="skill-icon-card" key={index}>
+              <div 
+                key={index} 
+                className="skill-icon-card" 
+                style={{ 
+                  animationDelay: `${additionalSkillsDelay[index]}s` 
+                }}
+              >
                 <div className="skill-icon-wrapper">
-                  <img src={skill.icon} alt={`${skill.name} icon`} className="skill-icon" />
+                  <img 
+                    src={skill.icon} 
+                    alt={skill.name} 
+                    className="skill-icon" 
+                  />
                 </div>
                 <span className="skill-icon-name">{skill.name}</span>
               </div>
             ))}
           </div>
-        </section>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+// Contact Page Component
+function Contact() {
+  return (
+    <div className="page-content">
+      <h2 className="page-title">Get In Touch</h2>
+
+      <div className="contact-container">
+        <div className="contact-intro">
+          <img 
+            src="/contactmeblueicon.png" 
+            alt="Contact illustration" 
+            className="contact-main-icon" 
+          />
+          <p>
+            I'm always open to discussing new projects, creative ideas, or opportunities to be part of your vision. 
+            Feel free to reach out using any of the methods below!
+          </p>
+        </div>
+
+        <div className="contact-grid">
+          {/* LinkedIn Card */}
+          <div className="contact-card">
+            <img src="/linkedin-icon.png" alt="LinkedIn" className="contact-icon" />
+            <h3>LinkedIn</h3>
+            <a 
+              href="https://www.linkedin.com/in/brandoncjw25/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-link"
+            >
+              linkedin.com/in/brandoncjw25
+            </a>
+          </div>
+
+          {/* GitHub Card */}
+          <div className="contact-card">
+            <img src="/github-icon.png" alt="GitHub" className="contact-icon" />
+            <h3>GitHub</h3>
+            <a 
+              href="https://github.com/brandonchinjw" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              className="contact-link"
+            >
+              github.com/brandonchinjw
+            </a>
+          </div>
+
+          {/* Email Card */}
+          <div className="contact-card">
+            <img src="/email-icon.png" alt="Email" className="contact-icon" />
+            <h3>Email</h3>
+            <a 
+              href="mailto:brandoncjw@hkn.eecs.berkeley.edu" 
+              className="contact-link"
+            >
+              brandoncjw@hkn.eecs.berkeley.edu
+            </a>
+          </div>
+
+          {/* Phone Card */}
+          <div className="contact-card">
+            <img src="/phone-icon.png" alt="Phone" className="contact-icon" />
+            <h3>Phone</h3>
+            <a href="tel:5107105292" className="contact-link">
+              (510) 710-5292
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   );
@@ -574,6 +739,7 @@ function App() {
           <Route path="/experience" element={<PageContent><Experience /></PageContent>} />
           <Route path="/research" element={<PageContent><Research /></PageContent>} />
           <Route path="/skills" element={<PageContent><Skills /></PageContent>} />
+          <Route path="/contact" element={<PageContent><Contact /></PageContent>} />
         </Routes>
       </div>
     </Router>

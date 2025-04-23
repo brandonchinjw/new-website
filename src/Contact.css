@@ -1,0 +1,173 @@
+/* src/Contact.css */
+
+/* Ensure consistent page title styling (can reuse from App.css or Skills.css if defined globally) */
+.page-title {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  margin-bottom: 2rem;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 0.5rem;
+  text-align: center; /* Center contact title */
+}
+
+.page-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%; /* Center underline */
+  transform: translateX(-50%);
+  width: 100px; /* Adjust width as needed */
+  height: 4px;
+  background: linear-gradient(90deg, #4e8cff, #9333EA); /* Example gradient */
+  border-radius: 2px;
+}
+
+.contact-container {
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto 4rem;
+  padding: 0 1rem;
+}
+
+.contact-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.contact-main-icon {
+  width: clamp(80px, 15vw, 120px);
+  height: auto;
+  margin-bottom: 1.5rem;
+  opacity: 0;
+  transform: scale(0.8);
+  animation: popIn 0.8s ease-out 0.2s forwards;
+}
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.contact-intro p {
+  font-size: clamp(1rem, 1.8vw, 1.15rem);
+  color: #555;
+  max-width: 600px;
+  line-height: 1.7;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.contact-card {
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.07);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border-top: 4px solid #4e8cff; /* Default border color */
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+/* Stagger animation */
+.contact-card:nth-child(1) { animation-delay: 0.3s; border-top-color: #3b5998; } /* LinkedIn Blue */
+.contact-card:nth-child(2) { animation-delay: 0.4s; border-top-color: #333; } /* GitHub Black */
+.contact-card:nth-child(3) { animation-delay: 0.5s; border-top-color: #db4437; } /* Email Red */
+.contact-card:nth-child(4) { animation-delay: 0.6s; border-top-color: #4caf50; } /* Phone Green */
+
+.contact-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+}
+
+.contact-icon {
+  width: 40px;
+  height: 40px;
+  margin-bottom: 1rem;
+  object-fit: contain;
+}
+
+.contact-card h3 {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.8rem;
+  color: #333;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.contact-link {
+  display: inline-block;
+  color: #4e8cff;
+  text-decoration: none;
+  font-weight: 500;
+  word-break: break-all; /* Prevent long links overflowing */
+  transition: color 0.2s ease;
+  font-family: 'Poppins', sans-serif;
+}
+
+.contact-link:hover {
+  color: #3a7bea;
+  text-decoration: underline;
+}
+
+/* Media Queries */
+@media (max-width: 768px) {
+  .contact-container {
+    margin-top: 1rem;
+  }
+
+  .contact-grid {
+    gap: 1.5rem;
+  }
+
+  .contact-card {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .contact-grid {
+    grid-template-columns: 1fr; /* Stack cards on small screens */
+    gap: 1rem;
+  }
+
+  .contact-card {
+    padding: 1.2rem;
+  }
+
+  .contact-icon {
+    width: 35px;
+    height: 35px;
+    margin-bottom: 0.8rem;
+  }
+
+  .contact-card h3 {
+    font-size: 1.1rem;
+  }
+
+  .contact-link {
+    font-size: 0.9rem;
+  }
+}
+
+/* Reuse fadeInUp animation if not globally defined */
+@keyframes fadeInUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+} 
