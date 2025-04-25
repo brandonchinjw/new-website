@@ -54,6 +54,16 @@ function Home() {
         </div>
       </div>
       
+      {/* Added Focus Areas Header */}
+      <div className="focus-areas-header">
+        <h2 className="focus-areas-title">Engineering Impactful Solutions</h2>
+        <p className="focus-areas-description">
+          Leveraging a strong foundation in engineering and a keen eye for user experience, 
+          I specialize in building innovative solutions across the full stack. 
+          Below is a quick synopsis of my skills and experiences.
+        </p>
+      </div>
+      
       <div className="feature-section">
         <div className="feature-card">
           <h3>Software Engineering</h3>
@@ -120,7 +130,7 @@ function Experience() {
       ]
     },
     {
-      title: "AI Research Intern",
+      title: "AI Research Scientist Intern",
       company: "Vector InfoTech",
       location: "Singapore (Remote)",
       period: "May '23 - August '23",
@@ -391,6 +401,7 @@ function Research() {
     {
       title: "Applying the Gricean Maxims to a Human-LLM Interaction Cycle: Design Insights from a Participatory Approach",
       status: "Accepted to CHI 2025 (32.8% acceptance rate)",
+      location: "KAIST Interaction Lab",
       abstract: "While large language models (LLMs) are increasingly used to assist users in various tasks through natural language interactions, these interactions often fall short due to LLMs' limited ability to infer contextual nuances and user intentions, unlike humans. To address this challenge, we draw inspiration from the Gricean Maxims—human communication theory that suggests principles of effective communication—and aim to derive design insights for enhancing human-AI interactions (HAI). Through participatory design workshops with communication experts, designers, and end-users, we identified ways to apply these maxims across the stages of the HAI cycle. Our findings include reinterpreted maxims tailored to human-LLM contexts and nine actionable design considerations categorized by interaction stage. These insights provide a concrete framework for designing more cooperative and user-centered LLM-based systems, bridging theoretical foundations in communication with practical applications in HAI.",
       highlights: [
         "Conducted four design workshops on communication deficiencies in human-LLM interactions, <strong>denoting nine design considerations lacking in the Human-AI Interaction Cycle</strong>.",
@@ -402,6 +413,7 @@ function Research() {
     {
       title: "IntentFlow: Interactive Support for Communicating Intent with LLMs in Writing Tasks",
       status: "Submitted, under review at UIST '25",
+      location: "KAIST Interaction Lab",
       abstract: "While large language models (LLMs) have become widely adopted for writing assistance, users often struggle to communicate their nuanced and evolving intents through linear, prompt-based interactions. In particular, intents—low-level and specific strategies to achieve a high-level task goal—are often vague, fluid, or even subconscious, making them difficult to express and refine through typical chat interfaces. To address this, we present IntenTune, a system designed to help users externalize, adjust, and reflect on their intents throughout LLM-assisted writing. IntenTune extracts users' high-level goals and fine-grained intents from natural language prompts and presents them as discrete, manipulable components in the interface. These components serve as interactive handles for users to revise, remove, or expand their intents—either through direct manipulation or follow-up targeted prompting. The system makes the impact of each intent on the output transparent by visually linking intent components to specific output segments. In a within-subjects study (N=12), participants using IntenTune expressed more diverse intents, engaged more in adjusting and removing them rather than correcting them, and produced outputs that better aligned with their evolving intents compared to a baseline chat-based interface. These findings highlight that explicit and editable representations of intent not only improve intent-output alignment but also enable new interactions—such as intent removal and reuse—that expand the design space for intent communication in LLM-based writing tools.",
       highlights: [
         "Utilized multi-agent framework to handle user queries and <strong>improve intent alignment to 90% success rate</strong>.",
@@ -415,6 +427,7 @@ function Research() {
     {
       title: "Improving Collaboration by Learning Communication Strategies",
       status: "Expected to submit to CSCW '25 (May 13th 2025)",
+      location: "UC Berkeley Haas School of Business",
       abstract: "The study explores the dynamics of collaboration and decision-making within a virtual game environment. Participants engage in a single-player game designed to simulate real-life strategic planning, with the objective of collecting items while minimizing the cost. The research is conducted in two phases. The first phase involves collecting behavioral data as players navigate the game under different conditions: without advice, with generic communication options, and with explained communication options. This phase aims to understand how different types of communication influence decision-making. In the second phase, we analyze and compare players' strategies to the A* search optimizer, aiming to provide insights into human strategic thinking and its alignment with algorithmic efficiency. Additionally, the study probes into participants' collaboration preferences, offering a deeper understanding of how individual strategies and communication impact team dynamics and performance. The ultimate goal is to enhance collaboration by learning and applying effective communication strategies in virtual settings.",
       highlights: [
         "Explored how humans make decisions and how AI can improve human performance through explanations, <strong>improving sequential decision making through personalized recommendations by 8%</strong>.",
@@ -561,7 +574,7 @@ function Skills() {
 
   return (
     <div className="page-content">
-      <h2 className="page-title">Skillset</h2>
+      <h2 className="page-title">Skill Set</h2>
       
       <div className="skills-intro-section">
         <div className="skills-intro-content">

@@ -380,13 +380,13 @@
 }
 
 .glitch:before {
-  animation: b 3s infinite linear alternate-reverse;
+  animation: b 4s linear forwards;
   left: -5px;
   text-shadow: 1px 0 cyan;
 }
 
 .glitch:after {
-  animation: a 2s infinite linear alternate-reverse;
+  animation: a 4s linear forwards;
   left: 5px;
   text-shadow: -1px 0 red;
 }
@@ -424,6 +424,7 @@
   }
   to {
     clip: rect(83px, 9999px, 44px, 0);
+    opacity: 0;
   }
 }
 
@@ -460,6 +461,7 @@
   }
   to {
     clip: rect(71px, 9999px, 108px, 0);
+    opacity: 0;
   }
 }
 
@@ -1666,6 +1668,21 @@ body {
   z-index: -1;
 }
 
+.project-location {
+  display: inline-block;
+  background-color: rgba(255, 255, 255, 0.2); /* Slightly different background */
+  padding: 0.4rem 0.9rem; /* Slightly smaller padding */
+  border-radius: 20px; /* Smaller border-radius */
+  font-size: 0.85rem; /* Smaller font size */
+  font-weight: 500; /* Lighter font weight */
+  margin-top: 0.6rem; /* Space from status */
+  margin-left: 5px; /* Indent slightly */
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 2;
+}
+
 .project-content {
   padding: 1.8rem;
   flex: 1;
@@ -2842,5 +2859,64 @@ body {
   height: 4px;
   background: linear-gradient(90deg, #3498db, #9b59b6);
   border-radius: 2px;
+}
+
+/* Focus Areas Header Styling */
+.focus-areas-header {
+  width: 90%;
+  max-width: 1200px;
+  margin: 3rem auto 1.5rem;
+  padding: 1rem;
+  text-align: center;
+  /* Add animation */
+  opacity: 0; /* Start hidden */
+  animation: pageEnter 0.5s ease-out 0.2s forwards;
+  animation-fill-mode: both;
+}
+
+.focus-areas-title {
+  font-size: clamp(1.7rem, 3.5vw, 2.2rem);
+  /* Remove standard color */
+  /* color: #333; */ 
+  margin-bottom: 1.5rem; /* Increased margin for underline */
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  /* Add gradient text */
+  background: linear-gradient(90deg, #4e8cff, #9333EA); /* Using blue/purple gradient */
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  /* Add underline effect */
+  position: relative;
+  display: inline-block; /* Needed for underline positioning */
+  padding-bottom: 0.6rem; /* Space for underline */
+}
+
+.focus-areas-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px; /* Slightly shorter underline */
+  height: 3px; /* Slightly thinner underline */
+  background: linear-gradient(90deg, #4e8cff, #9333EA);
+  border-radius: 1.5px;
+}
+
+.focus-areas-description {
+  font-size: clamp(1rem, 1.6vw, 1.1rem);
+  color: #555;
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-family: 'Poppins', sans-serif;
+}
+
+/* Adjust margin for feature section */
+.feature-section {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 5rem; /* Reduced top margin */
 }
 

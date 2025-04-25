@@ -18,6 +18,9 @@ function ResearchProject({ project }) {
         <div className="project-header" style={{ backgroundColor: project.color }}>
           <h3 className="project-title">{project.title}</h3>
           <div className="project-status">{project.status}</div>
+          {project.location && (
+            <div className="project-location">📍 {project.location}</div>
+          )}
         </div>
         
         <div className="project-content">
